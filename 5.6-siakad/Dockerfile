@@ -54,3 +54,5 @@ RUN cd /tmp && wget https://pecl.php.net/get/rdkafka-3.1.1.tgz && \
 
 RUN touch /usr/local/etc/php/conf.d/rdkafka.ini && \
     echo 'extension=rdkafka.so' > /usr/local/etc/php/conf.d/rdkafka.ini
+# Patch for critical CVE-2026-109618
+RUN echo 'session.upload_progress.enabled = Off' > /usr/local/etc/php/conf.d/cve-2026-109618.ini
