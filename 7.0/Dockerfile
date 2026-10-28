@@ -23,7 +23,7 @@ RUN pecl install xdebug-2.9.0
 RUN docker-php-ext-enable --ini-name 30-xdebug.ini xdebug
 
 # Install redis
-RUN echo '' | pecl install -o -f redis &&  rm -rf /tmp/pear &&  docker-php-ext-enable redis
+RUN echo '' | pecl install -o -f redis-5.3.7 &&  rm -rf /tmp/pear &&  docker-php-ext-enable redis
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf

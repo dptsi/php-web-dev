@@ -1,5 +1,14 @@
 FROM php:5.6-apache
 
+# Debian stretch sudah EOL, repo-nya dipindah ke archive.debian.org
+RUN sed -i -e 's|deb.debian.org|archive.debian.org|g' \
+        -e 's|security.debian.org|archive.debian.org|g' \
+        -e '/stretch-updates/d' /etc/apt/sources.list && \
+    for k in archive-key-10 archive-key-10-security archive-key-11; do \
+        curl -fsSL https://ftp-master.debian.org/keys/$k.asc -o /etc/apt/trusted.gpg.d/debian-$k.asc; \
+    done
+
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libedit-dev \
